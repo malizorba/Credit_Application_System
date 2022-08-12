@@ -32,8 +32,14 @@ public class CreditResult {
     @Enumerated
     private ApprovalStatus approvalStatus;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "national_identity_number", referencedColumnName = "national_identity_number")
     private Customer customer;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Credit_Application_Id", referencedColumnName = "id")
+    private CreditApplication creditApplication;
 
 }

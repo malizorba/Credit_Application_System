@@ -1,7 +1,6 @@
 package com.example.creditapplicationsystem.Model.DTO;
 
 import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
-import com.example.creditapplicationsystem.Model.Entity.CreditResult;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
@@ -33,6 +32,6 @@ public class CustomerDTO {
 
     private CreditApplication loanList;
 
-    private CreditResult creditResultList;
+
 
 }

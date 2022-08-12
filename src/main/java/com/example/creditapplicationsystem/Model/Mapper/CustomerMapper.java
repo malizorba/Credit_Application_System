@@ -16,7 +16,7 @@ public static CustomerDTO toDTO(Customer customer){
     customerDTO.setEmail(customer.getEmail());
     customerDTO.setMonthlySalary(customer.getMonthlySalary());
     customerDTO.setLoanList(customer.getLoanList());
-    customerDTO.setCreditResultList(customer.getCreditResultList());
+
 
     return customerDTO;
     }
@@ -29,7 +29,7 @@ public static CustomerDTO toDTO(Customer customer){
     customer.setEmail(customerDTO.getEmail());
     customer.setMonthlySalary(customerDTO.getMonthlySalary());
     customer.setLoanList(customerDTO.getLoanList());
-    customer.setCreditResultList(customerDTO.getCreditResultList());
+
     return customer;
     }
 }

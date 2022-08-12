@@ -1,6 +1,7 @@
 package com.example.creditapplicationsystem.Service.impl;
 
 import com.example.creditapplicationsystem.Exception.NotFoundException;
+import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
 import com.example.creditapplicationsystem.Model.Entity.CreditResult;
 import com.example.creditapplicationsystem.Model.Entity.Customer;
 import com.example.creditapplicationsystem.Model.Enum.ApprovalStatus;
@@ -48,13 +49,15 @@ public class CreditResultService {
 
     }
 
+
+
     public CreditResult createCreateCreditResult(CreditResult creditResult) {
         return creditResultRepository.save(creditResult);
     }
 
-    public void createCreditResultToCustomer(Customer customer) {
+    public void createCreditResultToCreditApp(CreditApplication creditApplication) {
         CreditResult creditResult = new CreditResult();
-        creditResult.setCustomer(customer);
+        creditResult.setCreditApplication(creditApplication);
         createCreateCreditResult(creditResult);
     }
 

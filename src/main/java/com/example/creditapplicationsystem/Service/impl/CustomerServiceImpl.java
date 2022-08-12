@@ -4,7 +4,6 @@ import com.example.creditapplicationsystem.Exception.DuplicateINexception;
 import com.example.creditapplicationsystem.Exception.NotFoundException;
 import com.example.creditapplicationsystem.Model.DTO.CustomerDTO;
 import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
-import com.example.creditapplicationsystem.Model.Entity.CreditResult;
 import com.example.creditapplicationsystem.Model.Entity.Customer;
 import com.example.creditapplicationsystem.Model.Mapper.CustomerMapper;
 import com.example.creditapplicationsystem.Repository.CustomerRepository;
@@ -35,8 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             Customer customer= CustomerMapper.toEntity(customerDTO);
             creditApplicationService.createCreditAppToCustomer(customer);
-            creditResultService.createCreditResultToCustomer(customer);
-            creditResultService.CalculateCreditLimit();
+
+
 
             return customerRepository.save(customer);
         }
@@ -102,11 +101,11 @@ public class CustomerServiceImpl implements CustomerService {
         customerDTO.setLoanList(creditApplication);
         createCustomer(customerDTO);
     }
-    public void createCreditResultToCustomer(CreditResult creditResult) {
-        CustomerDTO customerDTO=new CustomerDTO();
-        customerDTO.setCreditResultList(creditResult);
-        createCustomer(customerDTO);
-    }
+//    public void createCreditResultToCustomer(CreditResult creditResult) {
+//        CustomerDTO customerDTO=new CustomerDTO();
+//        customerDTO.setCreditResultList(creditResult);
+//        createCustomer(customerDTO);
+//    }
 
 
 }

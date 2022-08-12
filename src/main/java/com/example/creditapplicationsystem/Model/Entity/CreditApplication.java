@@ -1,5 +1,6 @@
 package com.example.creditapplicationsystem.Model.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +35,11 @@ public class CreditApplication implements Serializable {
     @Column(name = "applied_date")
     @CreationTimestamp
     private LocalDateTime dateofApply;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="Credit_Application_Id",referencedColumnName = "id")
+    private CreditResult creditResult;
 
 //    @Enumerated(EnumType.STRING)
 //    private ApprovalStatus approvalStatus;

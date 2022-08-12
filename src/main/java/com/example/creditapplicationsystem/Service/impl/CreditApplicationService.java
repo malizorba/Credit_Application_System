@@ -21,6 +21,8 @@ import java.util.Optional;
 public class CreditApplicationService implements com.example.creditapplicationsystem.Service.CreditApplicationService {
     private final CreditApplicationRepository creditApplicationRepository;
 
+    private final CreditResultService creditResultService;
+
 
 
 
@@ -39,6 +41,7 @@ public class CreditApplicationService implements com.example.creditapplicationsy
 
     @Override
     public CreditApplication createCreditApplication(CreditApplication creditApplication) {
+        creditResultService.createCreditResultToCreditApp(creditApplication);
         return creditApplicationRepository.save(creditApplication);
 
 
