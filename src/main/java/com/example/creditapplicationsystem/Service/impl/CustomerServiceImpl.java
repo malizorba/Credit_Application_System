@@ -34,6 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             Customer customer= CustomerMapper.toEntity(customerDTO);
             creditApplicationService.createCreditAppToCustomer(customer);
+//            creditResultService.createCreditResultToCustomer(customer);
 
 
 

@@ -36,6 +36,7 @@ public class CreditApplication implements Serializable {
     @CreationTimestamp
     private LocalDateTime dateofApply;
 
+    @Transient
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="Credit_Application_Id",referencedColumnName = "id")

@@ -54,10 +54,10 @@ public class Customer implements Serializable {
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CreditApplication loanList;
 
-    @JsonIgnore
-    @Transient
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private CreditResult creditResultList;
+//    @JsonIgnore
+//    @Transient
+//    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private CreditResult creditResultList;
 
 
 

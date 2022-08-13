@@ -22,44 +22,54 @@ public class CreditResultService {
     private final CreditScoreService creditScoreService;
 
 
-    public Integer CalculateCreditLimit() {
-        CreditResult creditResult = new CreditResult();
+    public CreditResult CalculateCreditLimit(CreditResult creditResult) {
+
         Customer customer = new Customer();
         creditResult.setCreditScore(creditScoreService.createCreditScore());
 
         if (creditResult.getCreditScore() >= 500 && creditResult.getCreditScore() < 1000) {
             creditResult.setApprovalStatus(ApprovalStatus.OK);
+            creditResultRepository.save(creditResult);
             if (customer.getMonthlySalary() < 5000) {
                 creditResult.setCreditLimit(10000);
-                return creditResult.getCreditLimit();
+                return creditResultRepository.save(creditResult);
             } else {
                 creditResult.setCreditLimit(20000);
-                return creditResult.getCreditLimit();
+                return creditResultRepository.save(creditResult);
             }
         } else {
             creditResult.setApprovalStatus(ApprovalStatus.REJECTED);
+            creditResult.setCreditLimit(0);
+            creditResultRepository.save(creditResult);
         }
         if (creditResult.getCreditScore() >= 1000) {
             creditResult.setApprovalStatus(ApprovalStatus.OK);
             creditResult.setCreditLimit((int) (customer.getMonthlySalary() * 4));
-            return creditResult.getCreditLimit();
+
+            creditResultRepository.save(creditResult);
         }
-        return creditResult.getCreditScore();
 
-
-    }
-
-
-
-    public CreditResult createCreateCreditResult(CreditResult creditResult) {
         return creditResultRepository.save(creditResult);
+
+
     }
+
+
+
+//    public CreditResult createCreateCreditResult(CreditResult creditResult) {
+//        return creditResultRepository.save(creditResult);
+//    }
 
     public void createCreditResultToCreditApp(CreditApplication creditApplication) {
         CreditResult creditResult = new CreditResult();
         creditResult.setCreditApplication(creditApplication);
-        createCreateCreditResult(creditResult);
+        CalculateCreditLimit(creditResult);
     }
+//    public void createCreditResultToCustomer(Customer customer) {
+//        CreditResult creditResult = new CreditResult();
+//        creditResult.setCustomer(customer);
+//        createCreateCreditResult(creditResult);
+//    }
 
     public List<CreditResult> getAllResult() {
         List<CreditResult> AllCreditResult = creditResultRepository.findAll();

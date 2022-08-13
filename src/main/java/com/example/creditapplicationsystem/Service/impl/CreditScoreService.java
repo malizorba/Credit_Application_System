@@ -8,7 +8,7 @@ public class CreditScoreService {
 
     public   Integer createCreditScore() {
 
-        Integer score = (int)Math.floor(Math.random()*(1000)+100);
+        Integer score = (int)Math.floor(Math.random()*(1000));
        return score;
     }
 }

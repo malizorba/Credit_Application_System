@@ -25,7 +25,7 @@ public class CustomerDTO {
     private String phoneNumber;
 
     @NotBlank(message = "Monthly income can not be null")
-    private double monthlySalary;
+    private Double monthlySalary;
 
     @Email
     private String email;

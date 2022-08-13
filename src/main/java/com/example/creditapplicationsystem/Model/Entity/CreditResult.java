@@ -29,13 +29,14 @@ public class CreditResult {
     @Column(name = "Credit_Limit")
     private Integer creditLimit;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ApprovalStatus approvalStatus;
 
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "national_identity_number", referencedColumnName = "national_identity_number")
-    private Customer customer;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "national_identity_number", referencedColumnName = "national_identity_number")
+      @Transient
+      private Customer customer;
 
 
     @OneToOne(cascade = CascadeType.ALL)
