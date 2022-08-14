@@ -18,13 +18,13 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CreditScoreService creditScoreService;
+
 
     private final CustomerRepository customerRepository;
 
     private final CreditApplicationService creditApplicationService;
 
-    private final CreditResultService creditResultService;
+
 
 
     @Override

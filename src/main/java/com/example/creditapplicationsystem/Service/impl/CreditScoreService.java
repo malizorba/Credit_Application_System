@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 public class CreditScoreService {
 
 
-    public   Integer createCreditScore() {
+    public Double createCreditScore() {
 
-        Integer score = (int)Math.floor(Math.random()*(1000));
+        Double score = (Double) Math.floor(Math.random()*(1500-200+1)+200);
        return score;
     }
 }

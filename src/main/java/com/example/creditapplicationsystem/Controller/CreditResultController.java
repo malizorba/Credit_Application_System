@@ -26,12 +26,12 @@ public class CreditResultController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getCreditApplicationbyId(@PathVariable("id") Long id) {
+    public ResponseEntity getCreditResultbyId(@PathVariable("id") Long id) {
         CreditResult byid = creditResultService.getResultyById(id);
         return ResponseEntity.status(HttpStatus.OK).body(byid);
     }
     @GetMapping("/customer/{nationalIdentityNumber}")
-    public CreditResult getCreditApplicationByCustomerId(@PathVariable  String nationalIdentityNumber){
+    public CreditResult getCreditResultByCustomerId(@PathVariable  String nationalIdentityNumber){
         return creditResultService.getCreditResultByCustomerId(nationalIdentityNumber);
     }
 }

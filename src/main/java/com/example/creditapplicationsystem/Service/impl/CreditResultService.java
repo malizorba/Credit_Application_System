@@ -27,26 +27,29 @@ public class CreditResultService {
         Customer customer = new Customer();
         creditResult.setCreditScore(creditScoreService.createCreditScore());
 
-        if (creditResult.getCreditScore() >= 500 && creditResult.getCreditScore() < 1000) {
+        if (creditResult.getCreditScore() >= 500.0 && creditResult.getCreditScore() < 1000.0 || customer.getMonthlySalary()<5000.0) {
             creditResult.setApprovalStatus(ApprovalStatus.OK);
-            creditResultRepository.save(creditResult);
-            if (customer.getMonthlySalary() < 5000) {
-                creditResult.setCreditLimit(10000);
-                return creditResultRepository.save(creditResult);
-            } else {
-                creditResult.setCreditLimit(20000);
-                return creditResultRepository.save(creditResult);
-            }
-        } else {
-            creditResult.setApprovalStatus(ApprovalStatus.REJECTED);
-            creditResult.setCreditLimit(0);
-            creditResultRepository.save(creditResult);
+            creditResult.setCreditLimit(10000.0);
+            return creditResultRepository.save(creditResult);
         }
-        if (creditResult.getCreditScore() >= 1000) {
-            creditResult.setApprovalStatus(ApprovalStatus.OK);
-            creditResult.setCreditLimit((int) (customer.getMonthlySalary() * 4));
+        else if (creditResult.getCreditScore() >= 500.0 && creditResult.getCreditScore() < 1000.0 ||customer.getMonthlySalary()>=5000.0){
+                creditResult.setApprovalStatus(ApprovalStatus.OK);
+                creditResult.setCreditLimit(20000.0);
+            return creditResultRepository.save(creditResult);
+//                return creditResultRepository.save(creditResult);
+        }
+         else if (creditResult.getCreditScore()<500.0){
+            creditResult.setApprovalStatus(ApprovalStatus.REJECTED);
+            creditResult.setCreditLimit(0.0);
+            return creditResultRepository.save(creditResult);
+//            creditResultRepository.save(creditResult);
+        }
 
-            creditResultRepository.save(creditResult);
+        else if (creditResult.getCreditScore() > 1000) {
+            creditResult.setApprovalStatus(ApprovalStatus.OK);
+            creditResult.setCreditLimit(customer.getMonthlySalary() * 4);
+            return creditResultRepository.save(creditResult);
+//            creditResultRepository.save(creditResult);
         }
 
         return creditResultRepository.save(creditResult);
@@ -56,20 +59,13 @@ public class CreditResultService {
 
 
 
-//    public CreditResult createCreateCreditResult(CreditResult creditResult) {
-//        return creditResultRepository.save(creditResult);
-//    }
 
     public void createCreditResultToCreditApp(CreditApplication creditApplication) {
         CreditResult creditResult = new CreditResult();
         creditResult.setCreditApplication(creditApplication);
         CalculateCreditLimit(creditResult);
     }
-//    public void createCreditResultToCustomer(Customer customer) {
-//        CreditResult creditResult = new CreditResult();
-//        creditResult.setCustomer(customer);
-//        createCreateCreditResult(creditResult);
-//    }
+
 
     public List<CreditResult> getAllResult() {
         List<CreditResult> AllCreditResult = creditResultRepository.findAll();

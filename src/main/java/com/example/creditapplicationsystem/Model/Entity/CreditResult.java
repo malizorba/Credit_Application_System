@@ -24,10 +24,10 @@ public class CreditResult {
 
 
     @Column
-    private Integer creditScore;
+    private Double creditScore;
 
     @Column(name = "Credit_Limit")
-    private Integer creditLimit;
+    private Double creditLimit;
 
     @Enumerated(EnumType.STRING)
     private ApprovalStatus approvalStatus;
