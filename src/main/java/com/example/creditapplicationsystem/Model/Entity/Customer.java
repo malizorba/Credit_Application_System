@@ -1,6 +1,5 @@
 package com.example.creditapplicationsystem.Model.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,9 +48,9 @@ public class Customer implements Serializable {
     @Email
     private String email;
 
-    @JsonIgnore
-    @Transient
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "credit_id")
     private CreditApplication loanList;
 
 //    @JsonIgnore

@@ -9,6 +9,7 @@ public class CreditScoreService {
     public Double createCreditScore() {
 
         Double score = (Double) Math.floor(Math.random()*(1500-200+1)+200);
-       return score;
+
+        return score;
     }
 }

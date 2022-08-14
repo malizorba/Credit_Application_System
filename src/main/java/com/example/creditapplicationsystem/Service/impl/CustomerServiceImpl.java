@@ -5,6 +5,7 @@ import com.example.creditapplicationsystem.Exception.NotFoundException;
 import com.example.creditapplicationsystem.Model.DTO.CustomerDTO;
 import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
 import com.example.creditapplicationsystem.Model.Entity.Customer;
+import com.example.creditapplicationsystem.Model.Enum.ApprovalStatus;
 import com.example.creditapplicationsystem.Model.Mapper.CustomerMapper;
 import com.example.creditapplicationsystem.Repository.CustomerRepository;
 import com.example.creditapplicationsystem.Service.CustomerService;
@@ -24,6 +25,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CreditApplicationService creditApplicationService;
 
+    private final CreditScoreService creditScoreService;
+
+
+
+
 
 
 
@@ -32,15 +38,39 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerRepository.existsById(customerDTO.getNationalIdentityNumber())) {
             throw new DuplicateINexception();
         } else {
-            Customer customer= CustomerMapper.toEntity(customerDTO);
-            creditApplicationService.createCreditAppToCustomer(customer);
-//            creditResultService.createCreditResultToCustomer(customer);
+            Customer customer = CustomerMapper.toEntity(customerDTO);
+            CreditApplication creditApplication = creditApplicationService.createCreditAppToCustomer(customer.getIdentityNationalNumber());
 
+
+            Double score = creditScoreService.createCreditScore();
+            creditApplication.setCreditScore(score.intValue());
+
+            if (score >= 500.0 && score < 1000.0 && customer.getMonthlySalary() < 5000.0) {
+                creditApplication.setApprovalStatus(ApprovalStatus.OK);
+                creditApplication.setCreditLimit(10000);
+
+
+            } else if (score >= 500.0 && score < 1000.0 && customer.getMonthlySalary() >= 5000.0) {
+                creditApplication.setApprovalStatus(ApprovalStatus.OK);
+                creditApplication.setCreditLimit(20000);
+
+
+            } else if (score < 500.0) {
+                creditApplication.setApprovalStatus(ApprovalStatus.REJECTED);
+
+            } else if (score > 1000) {
+                creditApplication.setApprovalStatus(ApprovalStatus.OK);
+                creditApplication.setCreditLimit((int) (customer.getMonthlySalary() * 4));
+
+            }
+            customer.setLoanList(creditApplication);
 
 
             return customerRepository.save(customer);
+
         }
     }
+
 
 
 
@@ -97,10 +127,12 @@ public class CustomerServiceImpl implements CustomerService {
 //        return customerRepository.save(customer);
 //    }
 
-    public void createCreditAppToCustomer(CreditApplication creditApplication) {
-        CustomerDTO customerDTO=new CustomerDTO();
-        customerDTO.setLoanList(creditApplication);
-        createCustomer(customerDTO);
+//    public void createCreditAppToCustomer(CreditResult creditResult) {
+//        Customer customer
+//        creditApplication.setCustomer(customer);
+//        createCreditApplication(creditApplication);
+//
+//    }
     }
 //    public void createCreditResultToCustomer(CreditResult creditResult) {
 //        CustomerDTO customerDTO=new CustomerDTO();
@@ -109,4 +141,4 @@ public class CustomerServiceImpl implements CustomerService {
 //    }
 
 
-}
+

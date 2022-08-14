@@ -2,7 +2,6 @@ package com.example.creditapplicationsystem.Service.impl;
 
 import com.example.creditapplicationsystem.Exception.NotFoundException;
 import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
-import com.example.creditapplicationsystem.Model.Entity.Customer;
 import com.example.creditapplicationsystem.Repository.CreditApplicationRepository;
 import com.example.creditapplicationsystem.Service.constant.Messages;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,6 @@ import java.util.Optional;
 public class CreditApplicationService implements com.example.creditapplicationsystem.Service.CreditApplicationService {
     private final CreditApplicationRepository creditApplicationRepository;
 
-    private final CreditResultService creditResultService;
-
 
 
 
@@ -39,14 +36,8 @@ public class CreditApplicationService implements com.example.creditapplicationsy
 
     }
 
-    @Override
-    public CreditApplication createCreditApplication(CreditApplication creditApplication) {
-        creditResultService.createCreditResultToCreditApp(creditApplication);
-        return creditApplicationRepository.save(creditApplication);
 
 
-
-        }
 
     @Override
     public boolean deleteCreditApplication(Long id) {
@@ -54,10 +45,11 @@ public class CreditApplicationService implements com.example.creditapplicationsy
         return true;
     }
 
-    public void createCreditAppToCustomer(Customer customer) {
+    public CreditApplication createCreditAppToCustomer(String nationalIdentityNumber) {
+
         CreditApplication creditApplication =new CreditApplication();
-        creditApplication.setCustomer(customer);
-        createCreditApplication(creditApplication);
+
+        return creditApplicationRepository.save(creditApplication);
 
     }
 

@@ -1,7 +1,6 @@
 package com.example.creditapplicationsystem.Service.impl;
 
 import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
-import com.example.creditapplicationsystem.Model.Entity.CreditResult;
 import com.example.creditapplicationsystem.Repository.CreditApplicationRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -62,14 +61,14 @@ class CreditApplicationServiceTest {
     @Test
     void createCreditApplication() {
         //init
-        CreditResult creditResult = new CreditResult(1L,556.2,500.0,null,null,null);
-        CreditApplication creditApplication=new CreditApplication(1L,null,null,creditResult);
+
+        CreditApplication creditApplication=new CreditApplication(1L,null,null,null,null,null);
 
         //stub - when
         when(creditApplicationRepository.save(creditApplication)).thenReturn(creditApplication);
 
         //then step
-        creditApplicationService.createCreditApplication(creditApplication);
+
         verify(creditApplicationRepository, times(1)).save(creditApplication);
     }
 
@@ -90,9 +89,9 @@ class CreditApplicationServiceTest {
 
     private List<CreditApplication> getSampleList() {
         List<CreditApplication> sampleList = new ArrayList<>();
-        CreditApplication creditApplication = new CreditApplication(1L, null, null, null);
-        CreditApplication creditApplication1 = new CreditApplication(1L, null, null, null);
-        CreditApplication creditApplication2 = new CreditApplication(2L, null, null, null);
+        CreditApplication creditApplication = new CreditApplication(1L, null,null,null,null,null);
+        CreditApplication creditApplication1 = new CreditApplication(1L, null,null,null,null,null);
+        CreditApplication creditApplication2 = new CreditApplication(2L, null,null,null,null,null);
 
         sampleList.add(creditApplication);
         sampleList.add(creditApplication1);

@@ -1,6 +1,6 @@
 package com.example.creditapplicationsystem.Model.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.creditapplicationsystem.Model.Enum.ApprovalStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,30 +28,27 @@ public class CreditApplication implements Serializable {
 
 //    private Double CreditAmount;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "national_identity_number", referencedColumnName = "national_identity_number")
+    @OneToOne(mappedBy = "loanList",cascade = CascadeType.ALL)
+//    @JoinColumn(name = "national_identity_number", referencedColumnName = "national_identity_number")
     private Customer customer;
+
+
 
     @Column(name = "applied_date")
     @CreationTimestamp
     private LocalDateTime dateofApply;
 
-    @Transient
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Credit_Application_Id",referencedColumnName = "id")
-    private CreditResult creditResult;
 
-//    @Enumerated(EnumType.STRING)
-//    private ApprovalStatus approvalStatus;
 
-//    @Column
-//    private Integer creditScore;
-//
-//    @Enumerated(EnumType.STRING)
-//    private Integer creditLimit;
+    @Enumerated(EnumType.STRING)
+    private ApprovalStatus approvalStatus;
 
-//    @Enumerated
-//    private CreditResult creditResult;
+    @Column
+    private Integer creditScore;
+
+    @Column
+    private Integer creditLimit;
+
+
 
 }

@@ -19,7 +19,7 @@ public interface CreditApplicationService {
 
 
 
-    CreditApplication createCreditApplication(CreditApplication creditApplication);
+
 
     boolean deleteCreditApplication(Long id);
 
