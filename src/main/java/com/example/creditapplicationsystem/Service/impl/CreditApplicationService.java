@@ -58,6 +58,7 @@ public class CreditApplicationService implements com.example.creditapplicationsy
         CreditApplication creditApplication =new CreditApplication();
         creditApplication.setCustomer(customer);
         createCreditApplication(creditApplication);
+
     }
 
     public CreditApplication getCreditApplicationByCustomerId(String nationalIdentityNumber) {
@@ -67,22 +68,7 @@ public class CreditApplicationService implements com.example.creditapplicationsy
                 .orElseThrow(() -> new NotFoundException(Messages.creditApplicationDoesntFound));
     }
 
-//    @Override
-//    public CreditApplication getApprovedCreditApplicationByCustomer(CreditApplication creditApplication) {
-//        return getAllApply().stream()
-//                .filter(c -> c.getApprovalStatus().equals(ApprovalStatus.OK))
-//                .findAny()
-//                .get();
-//    }
 
-
-//    @Override
-//    public CreditApplication getNotApprovedCreditApplicationByCustomer(CreditApplication creditApplication) {
-//        return getAllApply().stream()
-//                .filter(c -> c.getApprovalStatus().equals(ApprovalStatus.REJECTED))
-//                .findAny()
-//                .get();
-//    }
 
 
 

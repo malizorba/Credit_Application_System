@@ -33,17 +33,7 @@ public class AccountService {
 
     private final AuthenticationManager authenticationManager;
 
-    //    @PostConstruct
-//    private void postConstruct() {
-//        // Sample test admin user insert
-//        User admin = new User();
-//        admin.setUsername("admin-rmzn");
-//        admin.setPassword("pass12345");
-//        admin.setEmail("admin@email.com");
-//        admin.setRoles(Collections.singletonList(roleRepository.getById(1)));
-//        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-//        userRepository.save(admin);
-//    }
+
     public List<Account> getAll() {
         return accountRepository.findAll();
     }
@@ -93,7 +83,7 @@ public class AccountService {
         // Optional<Role> relatedRole = RoleRepository.findByName(isAdmin ? "ROLE_ADMIN" : "ROLE_USER");
 
 
-        // İF WE HAVE TWO ROLES WE CAN DO AS DOWN
+        // İF WE HAVE TWO ROLES WE CAN DO AS Up
         if (!accountRepository.existsByUsername(account.getUsername())) {
             account.setPassword(passwordEncoder.encode(account.getPassword()));
             Role role = isAdmin ? Role.ROLE_ADMIN : Role.ROLE_STANDARD_CLIENT;

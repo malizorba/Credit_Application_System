@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CreditResultRepository extends JpaRepository<CreditResult,Long> {
+
+
+//    Optional<CreditResult> findCreditResultByCustomer_IdentityNationalNumber(String nationalIdentityNumber);
 }

@@ -1,6 +1,7 @@
 package com.example.creditapplicationsystem.Service.impl;
 
 import com.example.creditapplicationsystem.Exception.NotFoundException;
+import com.example.creditapplicationsystem.Model.DTO.CustomerDTO;
 import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
 import com.example.creditapplicationsystem.Model.Entity.CreditResult;
 import com.example.creditapplicationsystem.Model.Entity.Customer;
@@ -25,6 +26,7 @@ public class CreditResultService {
     public CreditResult CalculateCreditLimit(CreditResult creditResult) {
 
         Customer customer = new Customer();
+        CustomerDTO customerDTO=new CustomerDTO();
         creditResult.setCreditScore(creditScoreService.createCreditScore());
 
         if (creditResult.getCreditScore() >= 500.0 && creditResult.getCreditScore() < 1000.0 || customer.getMonthlySalary()<5000.0) {
@@ -36,7 +38,7 @@ public class CreditResultService {
                 creditResult.setApprovalStatus(ApprovalStatus.OK);
                 creditResult.setCreditLimit(20000.0);
             return creditResultRepository.save(creditResult);
-//                return creditResultRepository.save(creditResult);
+
         }
          else if (creditResult.getCreditScore()<500.0){
             creditResult.setApprovalStatus(ApprovalStatus.REJECTED);
@@ -47,9 +49,9 @@ public class CreditResultService {
 
         else if (creditResult.getCreditScore() > 1000) {
             creditResult.setApprovalStatus(ApprovalStatus.OK);
-            creditResult.setCreditLimit(customer.getMonthlySalary() * 4);
+            creditResult.setCreditLimit(customerDTO.getMonthlySalary()*4);
             return creditResultRepository.save(creditResult);
-//            creditResultRepository.save(creditResult);
+
         }
 
         return creditResultRepository.save(creditResult);

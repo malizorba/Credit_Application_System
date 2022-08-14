@@ -15,13 +15,14 @@ import java.util.List;
 
 @Validated
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/account")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-   // @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_STANDARD_CLIENT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RolesAllowed("ROLE_ADMIN")
     @GetMapping("/all")
     public List<Account> getAllUsers() {
         return accountService.getAll();

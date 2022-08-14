@@ -15,15 +15,15 @@ public class SwaggerConfig {
     public Docket customDocket(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.usedstaffsaleapplication.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.creditapplicationsystem.Controller"))
 //                .paths(PathSelectors.regex("/api/.*"))
                 .build().apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Used Staff Sale App",
-                "Used Staff Sale App Simulation",
+                "Credit Application Management System",
+                "Credit Application Management System simulation",
                 "v1",
                 "Terms of service",
                 "mali.zorba@hotmail.com",
