@@ -5,6 +5,7 @@ import com.example.creditapplicationsystem.Model.Entity.CreditApplication;
 import com.example.creditapplicationsystem.Repository.CreditApplicationRepository;
 import com.example.creditapplicationsystem.Service.constant.Messages;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 
 
 public class CreditApplicationService implements com.example.creditapplicationsystem.Service.CreditApplicationService {
@@ -32,6 +34,7 @@ public class CreditApplicationService implements com.example.creditapplicationsy
 
     public CreditApplication getApplyById(Long id) {
         Optional<CreditApplication> CreditApplyById = creditApplicationRepository.findById(id);
+        log.info("Credit Application has been got");
         return CreditApplyById.orElseThrow(()->new EntityNotFoundException("Credit Application"));
 
     }
@@ -42,6 +45,7 @@ public class CreditApplicationService implements com.example.creditapplicationsy
     @Override
     public boolean deleteCreditApplication(Long id) {
         creditApplicationRepository.deleteById(id);
+        log.info("Credit Application has been deleted");
         return true;
     }
 
@@ -58,6 +62,7 @@ public class CreditApplicationService implements com.example.creditapplicationsy
         return creditApplication.stream()
                 .filter((l) -> l.getCustomer().getIdentityNationalNumber().equals(nationalIdentityNumber)).findFirst()
                 .orElseThrow(() -> new NotFoundException(Messages.creditApplicationDoesntFound));
+
     }
 
 
