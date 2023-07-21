@@ -11,9 +11,6 @@ While developing this project, I preferred the monolithic architecture because i
 At the same time, monolithic architecture is preferred because it will have a single jar file for deployment.
 The project consists of layers such as model, repository, service, controller using layered architecture.
 
-Almost all of the unit and integration tests run successfully. Also swagger has been added and exceptions are handled as much as possible. The project was made in accordance with the Rest conventions. Postgresql and JPA/Hibernate was used.
-
-In addition, when creating a customer, the customer's credit score is generated randomly.
 
 While developing this project, I preferred the monolithic architecture because it would be easier and faster to manage and develop due to the small size of the project, and for easy testing and error tracking.
 At the same time, monolithic architecture is preferred because it will have a single jar file for deployment.
